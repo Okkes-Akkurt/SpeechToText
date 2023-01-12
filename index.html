@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div class="d-flex flex-column w-50 mx-auto my-5">
+        <textarea name="" class="txt form-control mt-5" style="height: 300px;"></textarea>
+        <button class="btn btn-outline-warning w-25 mx-auto my-3 fs-2"><i class="fa-solid fa-microphone"></i></button>
+    </div>
+
+
+
+    <script>
+
+        let btn = document.querySelector('.btn').addEventListener('click', () => {
+            let recognition = new webkitSpeechRecognition;
+            recognition.lang = 'tr-TR';
+            recognition.addEventListener('result', (e) => {
+                document.querySelector('.txt').innerHTML = e.results[0][0].transcript;
+            });
+
+            let beep = new Audio('beep_short.ogg');
+            recognition.addEventListener('soundend', () => {
+                beep.play();
+            });
+
+            beep.play();
+            recognition.start();
+        })
+
+
+    </script>
+</body>
+
+</html>
